@@ -2,6 +2,7 @@ import express from "express";
 import cookieParser from "cookie-parser";
 
 import authRoute from "./routes/authRoute.js";
+import userRoute from "./routes/userRoute.js";
 import hotelRoute from "./routes/hotelRoute.js";
 import { config } from "./config/config.js";
 
@@ -14,6 +15,7 @@ app.get("/", (req, res) => {
 });
 
 app.use("/api/auth", authRoute);
+app.use("/api/users", userRoute);
 app.use("/api/hotels", hotelRoute);
 
 // handling errors

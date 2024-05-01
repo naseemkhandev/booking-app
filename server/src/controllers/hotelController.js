@@ -21,7 +21,6 @@ export const updateHotel = async (req, res, next) => {
       { $set: req.body },
       { new: true }
     );
-    if (req.params.id) return next(handleError(404, "Hotel not found!"));
 
     res
       .status(200)
