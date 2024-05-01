@@ -20,12 +20,29 @@ export const registerUser = async (req, res, next) => {
       password: hashedPassword,
     });
 
-    const { password: userPassword, ...userInfo } = newUser._doc;
+    const { password: userPassword, isAdmin, ...userInfo } = newUser._doc;
 
     res
       .status(201)
       .json({ message: "User Created Successfully!", user: userInfo });
   } catch (error) {
     return next(error.message);
+  }
+};
+
+export const loginUser = async (req, res, next) => {
+  try {
+    const { email, password } = req.body;
+
+    const user = await User.findOne({ email });
+    if (!user) return next(handleError(404, "User not found!"));
+
+    const isPasswordValid = await bcrypt.compare(password, user.password);
+    if (!isPasswordValid) return next(handleError(400, "Wrong Credentials!"));
+
+    const { password: userPassword, isAdmin, ...userInfo } = user._doc;
+    res.status(200).json({ message: "Login Successful!", user: userInfo });
+  } catch (error) {
+    next(error);
   }
 };
