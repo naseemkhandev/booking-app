@@ -1,10 +1,13 @@
 import express from "express";
+import cookieParser from "cookie-parser";
+
 import authRoute from "./routes/authRoute.js";
 import hotelRoute from "./routes/hotelRoute.js";
 import { config } from "./config/config.js";
 
 const app = express();
 app.use(express.json());
+app.use(cookieParser());
 
 app.get("/", (req, res) => {
   res.send("API is running...");

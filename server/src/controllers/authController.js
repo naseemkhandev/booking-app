@@ -1,6 +1,15 @@
 import handleError from "../middlewares/handleError.js";
-import { User } from "../schema/userModal.js";
 import bcrypt from "bcrypt";
+import jwt from "jsonwebtoken";
+
+import { User } from "../schema/userModal.js";
+import { config } from "../config/config.js";
+
+const generateToken = (user) => {
+  return jwt.sign({ id: user._id, isAdmin: user.isAdmin }, config.jwtSecret, {
+    expiresIn: "7d",
+  });
+};
 
 export const registerUser = async (req, res, next) => {
   try {
@@ -22,7 +31,13 @@ export const registerUser = async (req, res, next) => {
 
     const { password: userPassword, isAdmin, ...userInfo } = newUser._doc;
 
+    const accessToken = generateToken(newUser);
+
     res
+      .cookie("accessToken", accessToken, {
+        httpOnly: true,
+        secure: config.env === "production",
+      })
       .status(201)
       .json({ message: "User Created Successfully!", user: userInfo });
   } catch (error) {
@@ -40,8 +55,16 @@ export const loginUser = async (req, res, next) => {
     const isPasswordValid = await bcrypt.compare(password, user.password);
     if (!isPasswordValid) return next(handleError(400, "Wrong Credentials!"));
 
+    const accessToken = generateToken(user);
+
     const { password: userPassword, isAdmin, ...userInfo } = user._doc;
-    res.status(200).json({ message: "Login Successful!", user: userInfo });
+    res
+      .cookie("accessToken", accessToken, {
+        httpOnly: true,
+        secure: config.env === "production",
+      })
+      .status(200)
+      .json({ message: "Login Successful!", user: userInfo });
   } catch (error) {
     next(error);
   }
