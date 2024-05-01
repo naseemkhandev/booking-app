@@ -1,10 +1,11 @@
 import express from "express";
 import cookieParser from "cookie-parser";
 
+import { config } from "./config/config.js";
 import authRoute from "./routes/authRoute.js";
 import userRoute from "./routes/userRoute.js";
 import hotelRoute from "./routes/hotelRoute.js";
-import { config } from "./config/config.js";
+import roomRoute from "./routes/roomRoute.js";
 
 const app = express();
 app.use(express.json());
@@ -17,6 +18,7 @@ app.get("/", (req, res) => {
 app.use("/api/auth", authRoute);
 app.use("/api/users", userRoute);
 app.use("/api/hotels", hotelRoute);
+app.use("/api/rooms", roomRoute);
 
 // handling errors
 app.use((err, req, res, next) => {
