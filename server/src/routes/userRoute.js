@@ -5,11 +5,13 @@ import {
   getUser,
   updateUser,
 } from "../controllers/userController.js";
+import verifyUser from "../middlewares/VerifyUser.js";
+import verifyAdmin from "../middlewares/VerifyAdmin.js";
 const userRoute = express.Router();
 
-userRoute.put("/:id", updateUser);
-userRoute.delete("/:id", deleteUser);
-userRoute.get("/:id", getUser);
-userRoute.get("/", getAllUsers);
+userRoute.put("/:id", verifyUser, updateUser);
+userRoute.delete("/:id", verifyUser, deleteUser);
+userRoute.get("/:id", verifyUser, getUser);
+userRoute.get("/", verifyAdmin, getAllUsers);
 
 export default userRoute;

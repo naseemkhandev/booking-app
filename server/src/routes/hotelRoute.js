@@ -6,11 +6,12 @@ import {
   getHotel,
   getAllHotels,
 } from "../controllers/hotelController.js";
+import verifyAdmin from "../middlewares/VerifyAdmin.js";
 const hotelRoute = express.Router();
 
-hotelRoute.post("/", createHotel);
-hotelRoute.put("/:id", updateHotel);
-hotelRoute.delete("/:id", deleteHotel);
+hotelRoute.post("/", verifyAdmin, createHotel);
+hotelRoute.put("/:id", verifyAdmin, updateHotel);
+hotelRoute.delete("/:id", verifyAdmin, deleteHotel);
 hotelRoute.get("/:id", getHotel);
 hotelRoute.get("/", getAllHotels);
 
