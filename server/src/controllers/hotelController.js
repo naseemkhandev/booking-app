@@ -50,3 +50,15 @@ export const getHotel = async (req, res) => {
     res.status(500).json({ message: error.message });
   }
 };
+
+export const getAllHotels = async (req, res) => {
+  try {
+    const hotels = await Hotel.find();
+
+    res
+      .status(200)
+      .json({ message: "All Hotels Fetched Successfully!", hotels: hotels });
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
