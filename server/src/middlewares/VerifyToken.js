@@ -15,7 +15,7 @@ const verifyToken = (req, res, next) => {
       next();
     });
   } catch (error) {
-    next(error);
+    next(error.message);
   }
 };
 
