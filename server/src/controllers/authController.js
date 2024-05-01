@@ -1,6 +1,6 @@
-export const registerUser = async (req, res) => {
+export const registerUser = async (req, res, next) => {
   try {
   } catch (error) {
-    res.status(500).json({ message: error.message });
+    return next(error.message);
   }
 };

@@ -10,7 +10,7 @@ export const createHotel = async (req, res, next) => {
       .status(201)
       .json({ message: "Hotel Created Successfully!", hotel: newHotel });
   } catch (error) {
-    next(handleError(error.message));
+    next(error.message);
   }
 };
 
@@ -27,7 +27,7 @@ export const updateHotel = async (req, res, next) => {
       .status(200)
       .json({ message: "Hotel Updated Successfully!", hotel: hotel });
   } catch (error) {
-    next(handleError(error.message));
+    next(error.message);
   }
 };
 
@@ -37,7 +37,7 @@ export const deleteHotel = async (req, res, next) => {
 
     res.status(200).json({ message: "Hotel has been Deleted Successfully!" });
   } catch (error) {
-    next(handleError(error.message));
+    next(error.message);
   }
 };
 
@@ -49,7 +49,7 @@ export const getHotel = async (req, res, next) => {
       .status(200)
       .json({ message: "Single Hotel Fetched Successfully!", hotel: hotel });
   } catch (error) {
-    next(handleError(error.message));
+    next(error.message);
   }
 };
 
@@ -61,6 +61,6 @@ export const getAllHotels = async (req, res, next) => {
       .status(200)
       .json({ message: "All Hotels Fetched Successfully!", hotels: hotels });
   } catch (error) {
-    next(handleError(error.message));
+    next(error.message);
   }
 };

@@ -21,7 +21,7 @@ app.use((err, req, res, next) => {
   return res.status(errorStatus).json({
     success: false,
     status: errorStatus,
-    error: errorMessage,
+    message: errorMessage,
     stack: config.env === "production" ? "" : err.stack,
   });
 });
