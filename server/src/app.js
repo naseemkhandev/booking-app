@@ -1,5 +1,6 @@
 import express from "express";
 import cookieParser from "cookie-parser";
+import cors from "cors";
 
 import { config } from "./config/config.js";
 import authRoute from "./routes/authRoute.js";
@@ -10,6 +11,12 @@ import roomRoute from "./routes/roomRoute.js";
 const app = express();
 app.use(express.json());
 app.use(cookieParser());
+app.use(
+  cors({
+    origin: config.clientUrl,
+    credentials: true,
+  })
+);
 
 app.get("/", (req, res) => {
   res.send("API is running...");
