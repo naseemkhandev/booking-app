@@ -55,7 +55,6 @@ export const getHotel = async (req, res, next) => {
 export const getAllHotels = async (req, res, next) => {
   try {
     const { min, max, limit, ...others } = req.query;
-    console.log("Received query parameters: ", req.query);
 
     const hotels = await Hotel.find({
       ...others,

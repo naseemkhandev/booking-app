@@ -23,8 +23,6 @@ const Hotel = () => {
     loading,
   } = useFetch(`/hotels/find/${id}`);
 
-  console.log(hotel);
-
   const handleOpen = (i) => {
     setSlideNumber(i);
     setOpen(true);
