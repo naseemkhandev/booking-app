@@ -20,7 +20,7 @@ const Featured = () => {
             />
             <div className="featuredTitles">
               <h1>Dublin</h1>
-              <h2>{data?.cities[0]} properties</h2>
+              <h2>{data?.cities?.[0]} properties</h2>
             </div>
           </div>
 
@@ -32,7 +32,7 @@ const Featured = () => {
             />
             <div className="featuredTitles">
               <h1>Reno</h1>
-              <h2>{data?.cities[1]} properties</h2>
+              <h2>{data?.cities?.[1]} properties</h2>
             </div>
           </div>
           <div className="featuredItem">
@@ -43,7 +43,7 @@ const Featured = () => {
             />
             <div className="featuredTitles">
               <h1>Austin</h1>
-              <h2>{data?.cities[2]} properties</h2>
+              <h2>{data?.cities?.[2]} properties</h2>
             </div>
           </div>
         </>

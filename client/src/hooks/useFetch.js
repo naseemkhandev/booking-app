@@ -7,8 +7,8 @@ const useFetch = (endpoint) => {
 
   useEffect(() => {
     const fetchData = async () => {
-      setLoading(true);
       try {
+        setLoading(true);
         const response = await fetch(
           `${process.env.REACT_APP_BACKEND_URL}${endpoint}`
         );
