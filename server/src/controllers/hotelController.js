@@ -54,7 +54,13 @@ export const getHotel = async (req, res, next) => {
 
 export const getAllHotels = async (req, res, next) => {
   try {
-    const hotels = await Hotel.find();
+    const { min, max, limit, ...others } = req.query;
+    console.log("Received query parameters: ", req.query);
+
+    const hotels = await Hotel.find({
+      ...others,
+      cheapestPrice: { $gte: min || 1, $lte: max || 999 },
+    }).limit(limit);
 
     res
       .status(200)
